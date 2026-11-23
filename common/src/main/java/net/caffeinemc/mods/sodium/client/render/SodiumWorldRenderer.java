@@ -325,7 +325,7 @@ public class SodiumWorldRenderer {
 
         // translucency sorting can be disabled in development environments by setting the debug option in the config file
         this.useTranslucencySorting = !PlatformRuntimeInformation.getInstance().isDevelopmentEnvironment() || SodiumClientMod.options().debug.terrainSortingEnabled;
-        var sortBehavior = this.useTranslucencySorting ? SortBehavior.DYNAMIC_DEFER_NEARBY_ZERO_FRAMES : SortBehavior.OFF;
+        var sortBehavior = this.useTranslucencySorting ? SortBehavior.DYNAMIC_DEFER_NEARBY_ONE_FRAME : SortBehavior.OFF;
 
         this.renderDistance = this.client.options.getEffectiveRenderDistance();
 

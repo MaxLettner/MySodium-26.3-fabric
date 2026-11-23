@@ -64,7 +64,10 @@ public class RenderSectionManager {
     private static final float NEARBY_SORT_DISTANCE = Mth.square(25.0f);
 
     private static final float FRAME_DURATION_UPLOAD_FRACTION = 0.3f;
-    private static final long MIN_UPLOAD_DURATION_BUDGET = 10_000_000L; // 2ms
+    // Upstream used 10ms here (despite the "2ms" comment), which always overrides the 30% fraction above.
+    // At 60 Hz that lets uploads take up to 10 of 16.6 ms per frame, which causes visible hitches on a
+    // shared-memory iGPU (Vega 8). 3ms keeps frame pacing smooth; the 30% fraction still scales on slow frames.
+    private static final long MIN_UPLOAD_DURATION_BUDGET = 3_000_000L; // 3ms
 
     private final ChunkBuilder builder;
 
